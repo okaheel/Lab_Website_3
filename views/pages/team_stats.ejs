@@ -1,0 +1,55 @@
+<% include ../partials/header %>
+<% include ../partials/menu %>
+<div class="container">
+	<br>
+	<div class="jumbotron">
+		<h1 class="display-4">Fall 2018 Stats</h1>
+		<p class="lead">Detailed information on how the Buffs are doing in the 2018 Football Season!</p>
+	</div>
+
+	<table class="table table-bordered" id="stats_table">
+		<tr>
+			<th class="align-bottom" rowspan="2">Game Date</th>
+			<th class="align-bottom" rowspan="2">Opposing Team Name</th>
+			<th class="text-center" colspan="2">Score</th>
+			<th class="align-bottom" rowspan="2">Winner</th>
+		</tr>
+		<tr>
+			<th>Home Score</th>
+			<th>Opp. Score</th>
+		</tr>
+		<% games.forEach(function(game) { %>
+		<tr>
+			<td><%= game.game_date.toDateString() %></td>
+			<td><%= game.visitor_name %></td>
+			<td><%= game.home_score %></td>
+			<td><%= game.visitor_score %></td>
+			<% if (game.visitor_score > game.home_score){ %>
+			<td><%= game.visitor_name %></td>
+			<% } else { %>
+			<td>CU</td>
+			<% } %>
+		</tr>
+		<% }) %>
+
+	</table>
+	<br>
+	<table class="table text-center">
+		<tr>
+			<th>Wins</th>
+			<th>Losses</th>
+		</tr>
+		<tr>
+			<td>
+				<%- wins %>
+			</td>
+			<td>
+				<%- losses %>
+				<!-- TODO: Display the total number of losses here.  
+							    This value should come from your server.js files query, don't calculate it in this file! -->
+			</td>
+		</tr>
+	</table>
+
+</div>
+<% include ../partials/footer %>
